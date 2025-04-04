@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "C_FPSCharacter.h"
 #include "GameFramework/PlayerController.h"
 #include "C_FPSController.generated.h"
 
@@ -14,7 +15,7 @@ class KILLINGSTREAK_API AC_FPSController : public APlayerController
 
 public:
 	AC_FPSController();
-
+	
 protected:
 	virtual void BeginPlay() override;
 };

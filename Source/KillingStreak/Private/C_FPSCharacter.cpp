@@ -15,17 +15,23 @@ AC_FPSCharacter::AC_FPSCharacter()
 	PlayerCam->SetupAttachment(GetRootComponent());
 	PlayerMesh = CreateDefaultSubobject<USkeletalMeshComponent>("PlayerMesh");
 	PlayerMesh->SetupAttachment(PlayerCam);
-	CurrentWeapon = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("PlayerGun"));
+	CurrentWeapon = CreateDefaultSubobject<UChildActorComponent>("PlayerGun");
 	CurrentWeapon->SetupAttachment(PlayerCam);
 }
 
 void AC_FPSCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+	InitValues();
+}
+
+void AC_FPSCharacter::InitValues()
+{
 	GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
 	CanDash = true;
 	CanSlide = true;
 }
+
 
 void AC_FPSCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
@@ -55,6 +61,8 @@ void AC_FPSCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 		//Jumping
 		FPSInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
 		FPSInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &AC_FPSCharacter::StopJumping);
+		//Shooting
+		
 	}
 }
 
@@ -151,3 +159,4 @@ void AC_FPSCharacter::ResetSlide()
 		GEngine->AddOnScreenDebugMessage(4, 5.f, FColor::Orange, "SlideRest");
 	}
 }
+

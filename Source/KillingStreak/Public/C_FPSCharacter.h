@@ -26,18 +26,18 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PlayerVelocities")
 	double DashSpeed;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "PlayerActions")
+	UPROPERTY(BlueprintReadOnly, Category = "PlayerActions")
 	bool isWalking;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "PlayerActions")
+	UPROPERTY(BlueprintReadOnly, Category = "PlayerActions")
 	bool isSprinting;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "PlayerActions")
+	UPROPERTY(BlueprintReadOnly, Category = "PlayerActions")
 	bool isDashing;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "PlayerActions")
+	UPROPERTY(BlueprintReadOnly, Category = "PlayerActions")
 	bool isSliding;;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "PlayerCan?")
+	UPROPERTY(BlueprintReadOnly, Category = "PlayerCan?")
 	bool CanDash;
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "PlayerCan?")
+	UPROPERTY(BlueprintReadOnly, Category = "PlayerCan?")
 	bool CanSlide;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DashVars")
@@ -55,12 +55,14 @@ public:
 	double SlideCooldown;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "SlideVars")
 	double SlideHeight;
+
+	void InitValues();
 	
 private:
 	UPROPERTY(EditAnywhere)
 	class UCameraComponent* PlayerCam;
 	UPROPERTY(EditAnywhere)
-	UStaticMeshComponent* CurrentWeapon;
+	UChildActorComponent* CurrentWeapon;
 	UPROPERTY(EditAnywhere)
 	USkeletalMeshComponent* PlayerMesh;
 	
@@ -83,6 +85,11 @@ protected:
 	UInputAction* SprintAction;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "InputVars")
 	UInputAction* SlideAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "InputVars")
+	UInputAction* ShootAction;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "InputVars")
+	UInputAction* ReloadAction;
+	
 	
 	UFUNCTION(Category = "InputFuncs") 
 	void Move(const FInputActionValue& Value);
