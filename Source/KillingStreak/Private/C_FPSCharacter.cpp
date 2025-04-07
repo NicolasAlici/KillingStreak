@@ -37,6 +37,7 @@ void AC_FPSCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+	AC_PlayerWeapon* PlayerWeapon = Cast<AC_PlayerWeapon>(CurrentWeapon->GetChildActor());
 	const AC_FPSController* ControllerRef = Cast<AC_FPSController>(Controller);
 	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(ControllerRef->GetLocalPlayer());
 	if (Subsystem)
@@ -62,7 +63,9 @@ void AC_FPSCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 		FPSInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
 		FPSInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &AC_FPSCharacter::StopJumping);
 		//Shooting
-		
+		FPSInputComponent->BindAction(ShootAction, ETriggerEvent::Triggered, PlayerWeapon, &AC_PlayerWeapon::ShootGun);
+		//Reloading
+		FPSInputComponent->BindAction(ReloadAction, ETriggerEvent::Triggered, PlayerWeapon, &AC_PlayerWeapon::ReloadGun);
 	}
 }
 
@@ -159,4 +162,5 @@ void AC_FPSCharacter::ResetSlide()
 		GEngine->AddOnScreenDebugMessage(4, 5.f, FColor::Orange, "SlideRest");
 	}
 }
+
 

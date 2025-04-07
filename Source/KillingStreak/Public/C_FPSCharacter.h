@@ -1,12 +1,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "C_PlayerWeapon.h"
 #include "GameFramework/Character.h"
 #include "C_FPSCharacter.generated.h"
 
 class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
+class AC_PlayerWeapon;
 
 UCLASS()
 class KILLINGSTREAK_API AC_FPSCharacter : public ACharacter
@@ -107,5 +109,4 @@ protected:
 	void Slide();
 	UFUNCTION(Category = "InputFuncs") 
 	void ResetSlide();
-	
 };
