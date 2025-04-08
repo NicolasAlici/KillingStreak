@@ -43,7 +43,7 @@ void AC_PlayerWeapon::ShootGun()
 		ShootAudioComp->Play();
 		if (GEngine)
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Blue, "Shooting");
+			GEngine->AddOnScreenDebugMessage(5, 1.f, FColor::Blue, "Shooting");
 		}
 	}
 }
