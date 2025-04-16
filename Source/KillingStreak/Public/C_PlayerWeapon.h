@@ -18,6 +18,8 @@ public:
 	double ShootRange;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "WeaponVars")
 	double TimeBtwShots;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "WeaponVars")
+	double DamageAmount;
 
 	UPROPERTY(EditAnywhere, Category = "WeaponSounds")
 	USoundBase* ShootSound;

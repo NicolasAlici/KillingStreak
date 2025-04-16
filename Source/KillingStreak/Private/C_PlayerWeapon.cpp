@@ -1,7 +1,8 @@
 #include "C_PlayerWeapon.h"
-
-#include "C_FPSController.h"
+#include "C_HealthComponent.h"
 #include "Components/AudioComponent.h"
+
+class UC_HealthComponent;
 
 AC_PlayerWeapon::AC_PlayerWeapon()
 {
@@ -71,9 +72,24 @@ void AC_PlayerWeapon::ShootRaycast()
 	FVector ForwardDirection = WeaponMesh->GetSocketRotation("Barrel").Vector();
 	FVector EndShootRaycast = (ForwardDirection * ShootRange) + StartShootRaycast;
 
-	GetWorld()->LineTraceSingleByChannel(ShootHit, StartShootRaycast, EndShootRaycast, ECC_Pawn, Params);
-	DrawDebugLine(GetWorld(), StartShootRaycast, EndShootRaycast, FColor::Blue, false, 3.f, 5, 5.f);
-		
+	if (GetWorld()->LineTraceSingleByChannel(ShootHit, StartShootRaycast, EndShootRaycast, ECC_Pawn, Params))
+	{
+		DrawDebugLine(GetWorld(), StartShootRaycast, EndShootRaycast, FColor::Blue, false, 3.f, 5, 2.f);
+		AActor* HitActor = ShootHit.GetActor();
+		if (HitActor)
+		{
+			UC_HealthComponent* HealthComp = HitActor->GetComponentByClass<UC_HealthComponent>();
+			if (HealthComp)
+			{
+				HealthComp->TakeDamage(DamageAmount);
+			}
+		}
+	}
+	else
+	{
+		DrawDebugLine(GetWorld(), StartShootRaycast, EndShootRaycast, FColor::White, false, 3.f, 5, 2.f);
+	}
+	
 }
 
 
