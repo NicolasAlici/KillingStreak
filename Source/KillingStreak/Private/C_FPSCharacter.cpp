@@ -1,5 +1,7 @@
-#include "Player/C_FPSCharacter.h"
-#include "Player/C_FPSController.h"
+#include "C_FPSCharacter.h"
+#include "C_FPSController.h"
+#include "C_PlayerHealthComponent.h"
+#include "C_PlayerWeapon.h"
 #include "Camera/CameraComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
@@ -17,6 +19,7 @@ AC_FPSCharacter::AC_FPSCharacter()
 	PlayerMesh->SetupAttachment(PlayerCam);
 	CurrentWeapon = CreateDefaultSubobject<UChildActorComponent>("PlayerGun");
 	CurrentWeapon->SetupAttachment(PlayerCam);
+	PlayerHealth = CreateDefaultSubobject<UC_PlayerHealthComponent>("PlayerHealth");
 }
 
 void AC_FPSCharacter::BeginPlay()

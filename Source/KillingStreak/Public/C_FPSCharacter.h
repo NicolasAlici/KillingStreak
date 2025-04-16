@@ -1,7 +1,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "C_PlayerWeapon.h"
 #include "GameFramework/Character.h"
 #include "C_FPSCharacter.generated.h"
 
@@ -9,6 +8,7 @@ class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
 class AC_PlayerWeapon;
+class UC_PlayerHealthComponent;
 
 UCLASS()
 class KILLINGSTREAK_API AC_FPSCharacter : public ACharacter
@@ -67,6 +67,8 @@ private:
 	UChildActorComponent* CurrentWeapon;
 	UPROPERTY(EditAnywhere)
 	USkeletalMeshComponent* PlayerMesh;
+	UPROPERTY(VisibleAnywhere)
+	UC_PlayerHealthComponent* PlayerHealth;
 	
 protected:
 	virtual void BeginPlay() override;
