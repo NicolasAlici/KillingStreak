@@ -1,5 +1,5 @@
-#include "C_FPSCharacter.h"
-#include "C_FPSController.h"
+#include "Player/C_FPSCharacter.h"
+#include "Player/C_FPSController.h"
 #include "Camera/CameraComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
